@@ -1,0 +1,91 @@
+<section class="row justify-content-center align-items-center min-vh-100">
+  <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+    <h2 class="text-center mb-5">Hi! Update your location</h2>
+    <form (ngSubmit)="submitForm()" #contactForm="ngForm">
+      <div class="form-group mt-3">
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          class="form-control mt-2"
+          id="name"
+          name="name"
+          required
+          [(ngModel)]="formData.name"
+          #name="ngModel"
+        />
+        <div
+          *ngIf="name.invalid && (name.dirty || name.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="name.errors && name.errors['required']">
+            Name is required.
+          </div>
+        </div>
+      </div>
+      <div class="form-group mt-3">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          class="form-control mt-2"
+          id="email"
+          name="email"
+          required
+          email
+          [(ngModel)]="formData.email"
+          #email="ngModel"
+        />
+        <div
+          *ngIf="email.invalid && (email.dirty || email.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="email.errors && email.errors['required']">
+            Email is required.
+          </div>
+          <div *ngIf="email.errors && email.errors['email']">
+            Invalid email format.
+          </div>
+        </div>
+      </div>
+      <div class="form-group mt-3">
+        <label for="location">Location:</label>
+        <input
+          type="text"
+          class="form-control mt-2"
+          id="location"
+          name="location"
+          required
+          [(ngModel)]="formData.location"
+          #location="ngModel"
+          (input)="searchLocations($event)"
+        />
+        <ul
+          *ngIf="showSuggestion && suggestions && suggestions.length > 0"
+          class="list-group"
+        >
+          <li
+            *ngFor="let suggestion of suggestions"
+            class="list-group-item cursor-pointer"
+            (click)="selectLocation(suggestion)"
+          >
+            {{ suggestion.name + "," }} {{ suggestion.countryName }}
+          </li>
+        </ul>
+        <div
+          *ngIf="location.invalid && (location.dirty || location.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="location.errors && location.errors['required']">
+            Location is required.
+          </div>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary mt-5 float-end"
+        [disabled]="contactForm.invalid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</section>

@@ -4,6 +4,7 @@ env.config();
 import cors from 'cors';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import { getAllUsers, saveUserLocation } from './ctrl/locationCtrl';
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -12,12 +13,9 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-	res.send({
-		data: 'Hello world!!',
-		message: 'server is working fine....',
-	});
-});
+app.post('/user/location', saveUserLocation);
+
+app.get('/users', getAllUsers);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {});
 

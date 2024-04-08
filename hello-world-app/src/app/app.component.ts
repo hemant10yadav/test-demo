@@ -13,11 +13,11 @@ export class AppComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   async ngOnInit(): Promise<void> {
-    try {
+   /*  try {
       const result = await lastValueFrom(this.apiService.get('/'));
       console.log(result);
     } catch (error) {
       console.log(error);
-    }
+    } */
   }
 }

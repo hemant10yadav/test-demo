@@ -29,4 +29,10 @@ export class ApiService {
   public delete<T>(endpoint: string): Observable<T> {
     return this.http.delete<T>(`${this.apiUrl}${endpoint}`);
   }
+
+  public getLocations<T>(location: string): Observable<T> {
+    return this.http.get<T>(
+      `http://api.geonames.org/searchJSON?name_startsWith=${location}&maxRows=5&username=dimagi`
+    );
+  }
 }
